@@ -92,7 +92,7 @@ Return the flashcards in the following JSON format:
 
     fs.unlinkSync(tempFilePath);
 
-    return NextResponse.json({ flashcards });
+    return NextResponse.json({ flashcardsId: docRef.id, flashcards });
   } catch (error) {
     console.error("Error generating flashcards:", error);
     return NextResponse.json(

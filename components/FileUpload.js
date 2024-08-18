@@ -17,6 +17,7 @@ const FileUpload = () => {
   const mutation = useMutation({
     mutationFn: async (fileURL) => {
       console.log("Sending file URL to API:", fileURL);
+      setUploading(true);
       const response = await axios.post("/api/generate-flashcards", {
         fileURL,
       });
@@ -26,10 +27,14 @@ const FileUpload = () => {
     onSuccess: (data) => {
       console.log("Flashcards generated successfully:", data.flashcards);
       toast.success("Flashcards generated!");
+      router.push(`/${data.flashcardsId}`);
     },
     onError: (error) => {
       console.error("Error generating flashcards:", error);
       toast.error("Error generating flashcards");
+    },
+    onSettled: () => {
+      setUploading(false);
     },
   });
 
@@ -59,8 +64,6 @@ const FileUpload = () => {
       } catch (error) {
         console.error("Error uploading file:", error);
         toast.error("Error uploading file");
-      } finally {
-        setUploading(false);
       }
     },
   });
@@ -74,7 +77,7 @@ const FileUpload = () => {
         })}
       >
         <input {...getInputProps()} />
-        {uploading ? (
+        {uploading || mutation.isLoading ? (
           <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
         ) : (
           <>
