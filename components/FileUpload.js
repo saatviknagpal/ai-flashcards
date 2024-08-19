@@ -82,7 +82,7 @@ const FileUpload = () => {
         ) : (
           <>
             <Inbox className="h-12 w-12 text-gray-500" />
-            <p className="text-gray-500">
+            <p className="text-gray-500 p-3">
               Drag and drop a PDF file here, or click to select one
             </p>
           </>

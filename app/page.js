@@ -6,15 +6,16 @@ import { LogIn } from "lucide-react";
 import DarkModeToggle from "@/components/dark-mode-toggle";
 import FileUpload from "@/components/FileUpload";
 import Navbar from "@/components/Navbar";
+import TextFlashcardGenerator from "@/components/text-flashcards";
 
 export default async function Home() {
   const { userId } = auth();
   const isAuth = !!userId;
 
   return (
-    <div className="w-screen min-h-screen p-5">
+    <div className="p-5">
       <Navbar />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="p-5">
         <div className="flex flex-col items-center text-center">
           <div className="flex items-center">
             <h1 className="mr-3 text-5xl font-semibold">
@@ -23,7 +24,7 @@ export default async function Home() {
           </div>
 
           <p className="max-w-xl mt-1 text-lg text-slate-600">
-            Upload PDF of your notes and create flashcards out of them.
+            Upload PDF of your notes or enter text to create flashcards.
           </p>
 
           {!userId && (
@@ -38,9 +39,13 @@ export default async function Home() {
           )}
 
           {isAuth && (
-            <div className="w-full mt-4">
-              <FileUpload />
-            </div>
+            <>
+              <div className="lg:w-[50%] my-4">
+                <FileUpload />
+              </div>
+              <p>OR</p>
+              <TextFlashcardGenerator />
+            </>
           )}
         </div>
       </div>
