@@ -65,7 +65,7 @@ Return the flashcards in the following JSON format:
         { role: "system", content: systemPrompt },
         { role: "user", content: text },
       ],
-      model: "gpt-4o-mini",
+      model: "gpt-4o",
     });
 
     let responseText = completion.choices[0].message.content;
